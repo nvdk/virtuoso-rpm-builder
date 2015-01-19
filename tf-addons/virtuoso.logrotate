@@ -1,0 +1,8 @@
+/var/log/virtuoso/database.log {
+    copytruncate
+    weekly
+    rotate 12
+    compress
+    missingok
+    create 0644 root root
+}
