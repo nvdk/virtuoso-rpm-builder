@@ -26,7 +26,7 @@ make
 %install
 make install DESTDIR=%{buildroot}
 mkdir -p %{buildroot}/{etc/init.d/,var/log/virtuoso,etc/logrotate.d}
-cp tf-addons/virtuoso.init  "%{buildroot}/etc/init.d/virtuoso-opensource"
+cp tf-addons/virtuoso.service  "%{buildroot}/etc/systemd/system/virtuoso.service"
 cp tf-addons/virtuoso.logrotate "%{buildroot}/etc/logrotate.d/virtuoso"
 sed -i 's/\/var\/lib\/virtuoso\/db\/virtuoso.log/\/var\/log\/virtuoso\/database.log/' %{buildroot}/var/lib/virtuoso/db/virtuoso.ini
 
@@ -37,7 +37,8 @@ echo "-- FILE LIST -- "
 cat $RPM_BUILD_DIR/file.list.%{name}
 
 %post
-/sbin/chkconfig virtuoso-opensource on
+systemctl enable /etc/systemd/system/virtuoso.service
+systemctl start virtuoso.service
  
 %clean
 rm -rf %{buildroot}
