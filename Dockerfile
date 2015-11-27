@@ -6,4 +6,4 @@ ADD build-rpm.sh /home/rpmbuild/
 ADD tf-addons/ /home/rpmbuild/virtuoso-opensource/tf-addons
 RUN chown rpmbuild -R /home/rpmbuild && chmod +x /home/rpmbuild/build-rpm.sh
 VOLUME /home/rpmbuild/RPMS
-ENTRYPOINT su rpmbuild -l -c /home/rpmbuild/build-rpm.sh
+ENTRYPOINT su rpmbuild -l -c "export VIRT_BRANCH && /home/rpmbuild/build-rpm.sh"
