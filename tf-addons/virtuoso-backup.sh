@@ -12,7 +12,7 @@ function createbackup {
 	BACKUPDATE=`date +%y%m%d-%H%M`
   	$ISQL -U $VIRTUSER -P $VIRTPASS <<ScriptDelimit
 		backup_context_clear();
-		exec('checkpoint);
+		exec('checkpoint');
 		backup_online('virt_backup_$BACKUPDATE#',1500,0,vector('$BACKUPDIR'));
 		exit;
 ScriptDelimit
